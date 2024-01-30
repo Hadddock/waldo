@@ -7,15 +7,24 @@ export default function ImageTagger() {
     var rect = e.target.getBoundingClientRect();
     var x = e.clientX - rect.left; //x position within the element.
     var y = e.clientY - rect.top; //y position within the element.
-    setMarkers("Left? : " + x + " ; Top? : " + y + ".");
+    setMarkers([x, y]);
   }
 
-  const [markers, setMarkers] = useState();
+  const [markers, setMarkers] = useState([-1, -1]);
 
   return (
-    <div>
-      {markers}
-      <img src={waldoImage} onClick={captureClick} />
+    <div id="tagging-grid">
+      <div
+        className="marker"
+        style={{
+          position: "absolute",
+          top: markers[1],
+          left: markers[0],
+        }}
+      ></div>
+      <div id="test-background">Test background</div>
+
+      <img src={waldoImage} onClick={captureClick} className="waldo-image" />
     </div>
   );
 }
