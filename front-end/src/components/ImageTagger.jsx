@@ -1,30 +1,30 @@
 import React, { useState } from "react";
 import waldoImage from "./../assets/waldo.jpeg";
+import PermanentMarker from "./PermanentMarker";
 
 export default function ImageTagger() {
   function captureClick(e) {
-    // e = Mouse click event.
-    var rect = e.target.getBoundingClientRect();
-    var x = e.clientX - rect.left; //x position within the element.
-    var y = e.clientY - rect.top; //y position within the element.
-    setMarkers([x, y]);
+    const x = e.clientX;
+    const y = e.clientY;
+    const divElement = document.getElementById("waldo-image");
+    const rect = divElement.getBoundingClientRect();
+    const offsetX = x - rect.left;
+    const offsetY = y - rect.top;
+    setMarker([offsetX, offsetY]);
+    console.log("You clicked here: " + offsetX + " " + offsetY);
   }
 
-  const [markers, setMarkers] = useState([-1, -1]);
+  const [marker, setMarker] = useState([-1000, -1000]);
 
   return (
     <div id="tagging-grid">
-      <div
-        className="marker"
-        style={{
-          position: "absolute",
-          top: markers[1],
-          left: markers[0],
-        }}
-      ></div>
-      <div id="test-background">Test background</div>
-
-      <img src={waldoImage} onClick={captureClick} className="waldo-image" />
+      <PermanentMarker x={marker[0]} y={marker[1]}></PermanentMarker>
+      <img
+        src={waldoImage}
+        onClick={captureClick}
+        className="waldo-image"
+        id="waldo-image"
+      />
     </div>
   );
 }
