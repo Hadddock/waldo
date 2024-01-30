@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import waldoImage from "./../assets/waldo.jpeg";
-import PermanentMarker from "./PermanentMarker";
+import SelectionMarker from "./SelectionMarker";
 
 export default function ImageTagger() {
   function captureClick(e) {
@@ -18,12 +18,14 @@ export default function ImageTagger() {
 
   return (
     <div id="tagging-grid">
-      <PermanentMarker x={marker[0]} y={marker[1]}></PermanentMarker>
+      <SelectionMarker x={marker[0]} y={marker[1]}></SelectionMarker>
+
       <img
         src={waldoImage}
         onClick={captureClick}
         className="waldo-image"
         id="waldo-image"
+
       />
     </div>
   );
