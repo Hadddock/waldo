@@ -6,8 +6,9 @@ export default function PermanentMarker({ x, y }) {
       className="marker"
       style={{
         position: "relative",
-        top: y,
+        top: y + 166,
         left: x,
+        zIndex: 0,
       }}
     ></div>
   );
