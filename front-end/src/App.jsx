@@ -1,9 +1,10 @@
 import React from "react";
 import "./App.css";
-import Test from "./components/test";
+import Test from "./components/Test";
+import ImageTagger from "./components/ImageTagger";
 
 function App() {
-  return <Test></Test>;
+  return <ImageTagger></ImageTagger>;
 }
 
 export default App;
