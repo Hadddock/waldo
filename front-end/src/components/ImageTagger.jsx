@@ -16,6 +16,11 @@ export default function ImageTagger() {
     const response = await fetch(
       `http://localhost:3000/guess/` + characterName + "/" + x + "/" + y
     );
+    if (!response.ok) {
+      const message = `An error occurred: ${response.statusText}`;
+      window.alert(message);
+      return;
+    }
     const records = await response.json();
     if (records.correct) {
       const charactersCurrentlyFound = charactersFound;
@@ -24,7 +29,7 @@ export default function ImageTagger() {
       setCharactersFound(charactersCurrentlyFound);
       setMarker([-1000, -1000]);
     } else {
-      console.log("Sorry, that's not " + characterName);
+      window.alert("Sorry, that's not " + characterName);
     }
   }
 
