@@ -75,10 +75,11 @@ router.get(
                   newFoundCharacters.push(characterName);
                 }
 
-                
                 //Win condition
                 if (newFoundCharacters.length === 5) {
-                  console.log("Winner!");
+                  console.log(
+                    "Winner! " + (new Date() - new Date(token.start_time))
+                  );
                 }
 
                 jwt.sign(
@@ -88,7 +89,11 @@ router.get(
                   },
                   process.env.JWT_SECRET_KEY,
                   (err, token) => {
-                    res.json({ correct: true, token: token });
+                    res.json({
+                      correct: true,
+                      token: token,
+                      start_time: token.startsWith,
+                    });
                   }
                 );
                 return;
