@@ -39,6 +39,7 @@ export default function ImageTagger() {
     const rect = divElement.getBoundingClientRect();
     const offsetX = x - rect.left;
     const offsetY = y - rect.top;
+    console.log(localStorage.token);
     setMarker([offsetX, offsetY]);
     console.log("You clicked here: " + offsetX + " " + offsetY);
   }
