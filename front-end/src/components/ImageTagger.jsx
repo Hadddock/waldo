@@ -4,7 +4,6 @@ import SelectionMarker from "./SelectionMarker";
 import PermanentMarker from "./PermanentMarker";
 
 const characterNames = ["Waldo", "Wilma", "Wizard", "Woof", "Odlaw"];
-const tolerance = 20;
 
 export default function ImageTagger() {
   async function submitCharacter(characterName, x, y) {
