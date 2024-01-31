@@ -13,15 +13,24 @@ export default function ImageTagger() {
     }
 
     const response = await fetch(
-      `http://localhost:3000/guess/` + characterName + "/" + x + "/" + y
+      `http://localhost:3000/guess/` + characterName + "/" + x + "/" + y,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.token,
+        },
+      }
     );
+
     if (!response.ok) {
       const message = `An error occurred: ${response.statusText}`;
       window.alert(message);
       return;
     }
-    const records = await response.json();
-    if (records.correct) {
+    const responseJson = await response.json();
+
+    if (responseJson.correct) {
+      //get a new token containing correctly guessed characters
+      localStorage.setItem("token", responseJson.token);
       const charactersCurrentlyFound = charactersFound;
 
       charactersCurrentlyFound[characterName] = { found: true, x: x, y: y };
