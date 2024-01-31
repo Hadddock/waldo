@@ -8,7 +8,7 @@ const characterNames = ["Waldo", "Wilma", "Wizard", "Woof", "Odlaw"];
 export default function ImageTagger() {
   async function submitCharacter(characterName, x, y) {
     if (!characterNames.includes(characterName)) {
-      console.log("Sorry, that's not a valid character");
+      window.alert("Invalid character name");
       return;
     }
 
