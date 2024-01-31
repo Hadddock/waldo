@@ -8,7 +8,6 @@ export default function PermanentMarker({ x, y }) {
         position: "relative",
         top: y + 166,
         left: x,
-        zIndex: 0,
       }}
     ></div>
   );

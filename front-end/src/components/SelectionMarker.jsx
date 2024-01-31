@@ -11,6 +11,8 @@ export default function SelectionMarker({ x, y, submitCharacter }) {
         gridRow: "1/-1",
         display: "flex",
         transform: "translateY(100%)",
+        pointerEvents: "none",
+        zIndex: 2,
       }}
     >
       <div className="marker"></div>
