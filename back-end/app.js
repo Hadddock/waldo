@@ -8,12 +8,12 @@ require("dotenv").config();
 
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-const mongoDB = process.env.CONNECTION_STRING;
-async function main() {
-  console.log(mongoDB);
-  await mongoose.connect(mongoDB);
-}
-main().catch((err) => console.log(err));
+// const mongoDB = process.env.CONNECTION_STRING;
+// async function main() {
+//   console.log(mongoDB);
+//   await mongoose.connect(mongoDB);
+// }
+// main().catch((err) => console.log(err));
 var app = express();
 
 var indexRouter = require("./routes/index");
