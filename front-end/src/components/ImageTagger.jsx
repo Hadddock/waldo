@@ -3,14 +3,26 @@ import waldoImage from "./../assets/waldo.jpeg";
 import SelectionMarker from "./SelectionMarker";
 import PermanentMarker from "./PermanentMarker";
 
+const characterNames = ["Waldo", "Wilma", "Wizard", "Woof", "Odlaw"];
+const tolerance = 20;
+
 export default function ImageTagger() {
-  function submitCharacter(characterName, x, y) {
-    const charactersCurrentlyFound = charactersFound;
-    const checkCharacterPosition = true;
-    if (checkCharacterPosition) {
-      setMarker([-1000, -1000]);
+  async function submitCharacter(characterName, x, y) {
+    if (!characterNames.includes(characterName)) {
+      console.log("Sorry, that's not a valid character");
+      return;
+    }
+
+    const response = await fetch(
+      `http://localhost:3000/guess/` + characterName + "/" + x + "/" + y
+    );
+    const records = await response.json();
+    if (records.correct) {
+      const charactersCurrentlyFound = charactersFound;
+
       charactersCurrentlyFound[characterName] = { found: true, x: x, y: y };
       setCharactersFound(charactersCurrentlyFound);
+      setMarker([-1000, -1000]);
     } else {
       console.log("Sorry, that's not " + characterName);
     }
