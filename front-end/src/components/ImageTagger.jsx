@@ -6,6 +6,8 @@ import PermanentMarker from "./PermanentMarker";
 const characterNames = ["Waldo", "Wilma", "Wizard", "Woof", "Odlaw"];
 
 export default function ImageTagger() {
+  const [loaded, setLoaded] = useState(false);
+
   async function submitCharacter(characterName, x, y) {
     if (!characterNames.includes(characterName)) {
       window.alert("Invalid character name");
@@ -50,6 +52,18 @@ export default function ImageTagger() {
     const offsetY = y - rect.top;
 
     setMarker([offsetX, offsetY]);
+  }
+
+  async function getToken() {
+    const response = await fetch("http://localhost:3000/login");
+    if (!response.ok) {
+      const message = `An error occurred: ${response.statusText}`;
+      window.alert(message);
+      return;
+    }
+    const tokenJson = await response.json();
+
+    localStorage.setItem("token", tokenJson.token);
   }
 
   const [marker, setMarker] = useState([-1000, -1000]);
@@ -99,6 +113,7 @@ export default function ImageTagger() {
         onClick={captureClick}
         className="waldo-image"
         id="waldo-image"
+        onLoad={getToken}
         style={{
           justifySelf: "center",
           alignSelf: "center",
