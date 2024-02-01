@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import waldoImage from "./../assets/waldo.jpeg";
 import SelectionMarker from "./SelectionMarker";
 import PermanentMarker from "./PermanentMarker";
@@ -7,6 +8,7 @@ const characterNames = ["Waldo", "Wilma", "Wizard", "Woof", "Odlaw"];
 
 export default function ImageTagger() {
   const [loaded, setLoaded] = useState(false);
+  const navigate = useNavigate();
 
   async function submitCharacter(characterName, x, y) {
     if (!characterNames.includes(characterName)) {
@@ -38,6 +40,10 @@ export default function ImageTagger() {
       charactersCurrentlyFound[characterName] = { found: true, x: x, y: y };
       setCharactersFound(charactersCurrentlyFound);
       setMarker([-1000, -1000]);
+      if (responseJson.end_time !== undefined) {
+        navigate("/score/" + responseJson.end_time);
+        return;
+      }
     } else {
       window.alert("Sorry, that's not " + characterName);
     }

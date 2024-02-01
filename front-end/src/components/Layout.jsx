@@ -24,7 +24,7 @@ export default function Layout(props) {
           </Link>
         )}
 
-        <Link to="/results">
+        <Link to="/highscores">
           <button>View Best Times</button>
         </Link>
       </header>

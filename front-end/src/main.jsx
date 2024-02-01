@@ -5,6 +5,7 @@ import Results from "./components/Results.jsx";
 import Layout from "./components/Layout.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ScoreEntry from "./components/ScoreEntry.jsx";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,15 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/results",
+    path: "/score/:time",
+    element: (
+      <Layout>
+        <ScoreEntry></ScoreEntry>
+      </Layout>
+    ),
+  },
+  {
+    path: "/highscores",
     element: (
       <Layout>
         <Results playerScore="1 billion"></Results>

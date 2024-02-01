@@ -16,6 +16,18 @@ router.get("/login", (req, res) => {
   );
 });
 
+router.get("/highscores/:name", verifyToken, (req, res) => {
+  jwt.verify(req.token, process.env.JWT_SECRET_KEY, (err, token) => {
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      console.log(req.params.name);
+      console.log(token.end_time);
+      //submit to database
+    }
+  });
+});
+
 router.get("/tester", verifyToken, (req, res, next) => {
   jwt.verify(req.token, process.env.JWT_SECRET_KEY, (err, authData) => {
     if (err) {
@@ -24,18 +36,6 @@ router.get("/tester", verifyToken, (req, res, next) => {
     }
   });
 });
-
-// router.get(
-//   "/tester",
-//   verifyToken,
-//  (req, res, next) =>
-//     jwt.verify(req.token, process.env.JWT_SECRET_KEY, (err, sessionInfo) => {
-//       if (err) {
-//         res.sendStatus(403);
-//       } else {
-//         console.log(sessionInfo.found_characters[0]);
-//         res.json({ wow: "wow" });
-//       }
 
 router.get(
   "/guess/:characterName/:x/:y",
@@ -74,24 +74,27 @@ router.get(
                   newFoundCharacters.push(characterName);
                 }
 
+                let end_time = undefined;
+
                 //Win condition
                 if (newFoundCharacters.length === 5) {
-                  console.log(
-                    "Winner! " + (new Date() - new Date(token.start_time))
-                  );
+                  end_time = new Date() - new Date(token.start_time);
+                  console.log("Winner! " + end_time);
                 }
 
                 jwt.sign(
                   {
                     start_time: token.start_time,
                     foundCharacters: newFoundCharacters,
+                    end_time: end_time,
                   },
                   process.env.JWT_SECRET_KEY,
                   (err, token) => {
                     res.json({
                       correct: true,
                       token: token,
-                      start_time: token.startsWith,
+                      start_time: token.start_time,
+                      end_time: end_time,
                     });
                   }
                 );
