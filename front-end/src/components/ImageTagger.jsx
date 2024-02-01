@@ -48,9 +48,9 @@ export default function ImageTagger() {
     const rect = divElement.getBoundingClientRect();
     const offsetX = x - rect.left;
     const offsetY = y - rect.top;
-    console.log(localStorage.token);
+   
     setMarker([offsetX, offsetY]);
-    console.log("You clicked here: " + offsetX + " " + offsetY);
+
   }
 
   const [marker, setMarker] = useState([-1000, -1000]);
@@ -65,7 +65,7 @@ export default function ImageTagger() {
 
   const [charactersFound, setCharactersFound] = useState(characters);
   useEffect(() => {
-    console.log("stateUpdated");
+
   }, [charactersFound]);
 
   return (

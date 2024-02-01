@@ -21,7 +21,6 @@ router.get("/tester", verifyToken, (req, res, next) => {
     if (err) {
       res.sendStatus(403);
     } else {
-      console.log(authData.found_characters[0]);
     }
   });
 });

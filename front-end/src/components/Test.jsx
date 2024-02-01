@@ -9,7 +9,6 @@ function Test() {
         window.alert(message);
         return;
       }
-      console.log(response);
       const records = await response.json();
 
       setMessage(records.foo);
