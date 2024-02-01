@@ -6,7 +6,7 @@ export default function ScoreEntry() {
   const { time } = useParams();
 
   async function submitTime(name) {
-    const response = await fetch(`http://localhost:3000/highscores/` + name, {
+    const response = await fetch(`http://localhost:3000/score/` + name, {
       headers: {
         Authorization: "Bearer " + localStorage.token,
       },

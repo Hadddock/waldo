@@ -3,6 +3,8 @@ var router = express.Router();
 const tolerance = 20;
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
+const Score = require("./../models/score");
+const mongoose = require("mongoose");
 
 const characterNames = ["Waldo", "Wilma", "Wizard", "Woof", "Odlaw"];
 
@@ -16,17 +18,45 @@ router.get("/login", (req, res) => {
   );
 });
 
-router.get("/highscores/:name", verifyToken, (req, res) => {
+router.get("/score/:name", verifyToken, (req, res) => {
   jwt.verify(req.token, process.env.JWT_SECRET_KEY, (err, token) => {
     if (err) {
       res.sendStatus(403);
     } else {
-      console.log(req.params.name);
-      console.log(token.end_time);
-      //submit to database
+      const name = req.params.name;
+      const time = Number(token.end_time);
+
+      if (name.length > 0 && name.length <= 100) {
+        const score = new Score({
+          player_name: name,
+          jwt: req.token,
+          time: time,
+        });
+
+        //check if score exsists using this jwt
+
+        if (Score.findOne({ jwt: req.token }) === null) {
+          score.save();
+        } else {
+          console.log("This token has been submitted before!");
+        }
+      }
     }
   });
 });
+
+router.get(
+  "/highscores",
+  asyncHandler(async (req, res) => {
+    const highscores = await Score.find().sort({ time: 1 }).limit(10).exec();
+    console.log(highscores);
+    const highscoresMaped = highscores.map((score) => ({
+      time: score.display_time,
+      name: score.player_name,
+    }));
+    res.json({ scores: highscoresMaped });
+  })
+);
 
 router.get("/tester", verifyToken, (req, res, next) => {
   jwt.verify(req.token, process.env.JWT_SECRET_KEY, (err, authData) => {
