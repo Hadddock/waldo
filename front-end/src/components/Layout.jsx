@@ -6,7 +6,16 @@ export default function Layout(props) {
 
   return (
     <>
-      <header>
+      <header
+        style={{
+          position: "fixed",
+          top: 0,
+          width: "100%",
+          gap: "10px",
+          display: "Flex",
+          padding: "10px",
+        }}
+      >
         {location.pathname === "/" ? (
           <button onClick={navigate.bind(null, 0)}>Restart Game</button>
         ) : (

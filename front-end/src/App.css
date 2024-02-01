@@ -33,3 +33,10 @@
 
   pointer-events: none;
 }
+
+header button {
+  background-color: #148cc1;
+  font-size: x-large;
+  padding: 5px;
+  border: 0px solid white;
+}
