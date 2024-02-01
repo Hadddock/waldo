@@ -39,4 +39,5 @@ header button {
   font-size: x-large;
   padding: 5px;
   border: 0px solid white;
+  cursor: pointer;
 }
