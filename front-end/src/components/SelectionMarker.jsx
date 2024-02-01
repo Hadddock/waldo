@@ -12,6 +12,8 @@ export default function SelectionMarker({ x, y, submitCharacter }) {
         display: "flex",
         transform: "translateY(100%)",
         pointerEvents: "none",
+        maxWidth: "300px",
+
         zIndex: 2,
       }}
     >

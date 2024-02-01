@@ -48,25 +48,22 @@ export default function ImageTagger() {
     const rect = divElement.getBoundingClientRect();
     const offsetX = x - rect.left;
     const offsetY = y - rect.top;
-   
-    setMarker([offsetX, offsetY]);
 
+    setMarker([offsetX, offsetY]);
   }
 
   const [marker, setMarker] = useState([-1000, -1000]);
 
   const characters = {
-    Waldo: { found: false, x: -100, y: -100 },
-    Wilma: { found: false, x: -100, y: -100 },
-    Wizard: { found: false, x: -100, y: -100 },
-    Woof: { found: false, x: -100, y: -100 },
-    Odlaw: { found: false, x: -100, y: -100 },
+    Waldo: { found: false, x: -10000, y: -100 },
+    Wilma: { found: false, x: -10000, y: -100 },
+    Wizard: { found: false, x: -10000, y: -100 },
+    Woof: { found: false, x: -10000, y: -100 },
+    Odlaw: { found: false, x: -10000, y: -100 },
   };
 
   const [charactersFound, setCharactersFound] = useState(characters);
-  useEffect(() => {
-
-  }, [charactersFound]);
+  useEffect(() => {}, [charactersFound]);
 
   return (
     <div id="tagging-grid">
@@ -102,6 +99,11 @@ export default function ImageTagger() {
         onClick={captureClick}
         className="waldo-image"
         id="waldo-image"
+        style={{
+          justifySelf: "center",
+          alignSelf: "center",
+          border: "10px solid red",
+        }}
       />
     </div>
   );
