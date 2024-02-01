@@ -40,3 +40,7 @@ header button {
   border: 0px solid white;
   cursor: pointer;
 }
+
+fieldset button {
+  font-size: large;
+}

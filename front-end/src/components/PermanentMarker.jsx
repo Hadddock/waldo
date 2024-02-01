@@ -6,7 +6,7 @@ export default function PermanentMarker({ x, y }) {
       className="marker"
       style={{
         position: "relative",
-        top: y + 166,
+        top: y + 190,
         borderColor: "lime",
         left: x,
       }}
