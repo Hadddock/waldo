@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 function Results() {
   const [highscores, setHighscores] = useState([]);
@@ -21,7 +22,7 @@ function Results() {
   return (
     <h1>
       {highscores.map((highscore) => (
-        <li key="a"> {highscore.name + " " + highscore.time} </li>
+        <li key={uuidv4()}> {highscore.name + " " + highscore.time} </li>
       ))}
     </h1>
   );
