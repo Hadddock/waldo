@@ -18,32 +18,39 @@ router.get("/login", (req, res) => {
   );
 });
 
-router.get("/score/:name", verifyToken, (req, res) => {
-  jwt.verify(req.token, process.env.JWT_SECRET_KEY, (err, token) => {
-    if (err) {
-      res.sendStatus(403);
-    } else {
-      const name = req.params.name;
-      const time = Number(token.end_time);
+router.get(
+  "/score/:name",
+  verifyToken,
+  asyncHandler(async (req, res) => {
+    jwt.verify(req.token, process.env.JWT_SECRET_KEY, async (err, token) => {
+      if (err) {
+        res.sendStatus(403);
+      } else {
+        const name = req.params.name;
 
-      if (name.length > 0 && name.length <= 100) {
-        const score = new Score({
-          player_name: name,
-          jwt: req.token,
-          time: time,
-        });
+        const time = Number(token.end_time);
 
-        //check if score exsists using this jwt
+        if (name.length > 0 && name.length <= 100) {
+          const score = new Score({
+            player_name: name,
+            jwt: req.token,
+            time: time,
+          });
 
-        if (Score.findOne({ jwt: req.token }) === null) {
-          score.save();
-        } else {
-          console.log("This token has been submitted before!");
+          //check if score exsists using this jwt
+          const scoreWithReusedToken = await Score.findOne({
+            jwt: req.token,
+          }).exec();
+          if (scoreWithReusedToken === null) {
+            score.save();
+          } else {
+            console.log("This token has been submitted before!");
+          }
         }
       }
-    }
-  });
-});
+    });
+  })
+);
 
 router.get(
   "/highscores",
