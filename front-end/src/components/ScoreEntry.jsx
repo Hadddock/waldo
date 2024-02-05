@@ -29,8 +29,6 @@ export default function ScoreEntry() {
   function submitForm(e) {
     e.preventDefault();
     const name = e.target[0].value;
-    submitTime(name);
-
     if (submitTime(name)) {
       navigate("/highscores");
     }
