@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
+const url =
+  import.meta.env.VITE_ENVIRONEMNT === "production"
+    ? "http://localhost:3000"
+    : "https://w-waldo-855c2f9cefa0.herokuapp.com/";
+
 function Results() {
   const [highscores, setHighscores] = useState([]);
 
   useEffect(() => {
     async function retriveHighscores() {
-      const response = await fetch(`http://localhost:3000/highscores`);
+      const response = await fetch(`${url}/highscores`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;

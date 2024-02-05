@@ -1,12 +1,16 @@
 import React from "react";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
+const url =
+  import.meta.env.VITE_ENVIRONEMNT === "production"
+    ? "http://localhost:3000"
+    : "https://w-waldo-855c2f9cefa0.herokuapp.com/";
 export default function ScoreEntry() {
   const navigate = useNavigate();
   const { time } = useParams();
 
   async function submitTime(name) {
-    const response = await fetch(`http://localhost:3000/score/` + name, {
+    const response = await fetch(`${url}/score/` + name, {
       headers: {
         Authorization: "Bearer " + localStorage.token,
       },

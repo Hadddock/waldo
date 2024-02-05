@@ -5,6 +5,10 @@ import SelectionMarker from "./SelectionMarker";
 import PermanentMarker from "./PermanentMarker";
 
 const characterNames = ["Waldo", "Wilma", "Wizard", "Woof", "Odlaw"];
+const url =
+  import.meta.env.VITE_ENVIRONEMNT === "production"
+    ? "http://localhost:3000"
+    : "https://w-waldo-855c2f9cefa0.herokuapp.com/";
 
 export default function ImageTagger() {
   const [loaded, setLoaded] = useState(false);
@@ -17,7 +21,7 @@ export default function ImageTagger() {
     }
 
     const response = await fetch(
-      `http://localhost:3000/guess/` + characterName + "/" + x + "/" + y,
+      `${url}/guess/` + characterName + "/" + x + "/" + y,
       {
         headers: {
           Authorization: "Bearer " + localStorage.token,
@@ -61,7 +65,7 @@ export default function ImageTagger() {
   }
 
   async function getToken() {
-    const response = await fetch("http://localhost:3000/login");
+    const response = await fetch(`${url}/login`);
     if (!response.ok) {
       const message = `An error occurred: ${response.statusText}`;
       window.alert(message);
