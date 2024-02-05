@@ -22,17 +22,15 @@ export default function ScoreEntry() {
       return false;
     }
     const responseJson = await response.json();
-    console.log(responseJson);
-    console.log(responseJson.currentRecord);
-
-    return true;
+    return responseJson.currentRecord;
   }
 
   function submitForm(e) {
     e.preventDefault();
     const name = e.target[0].value;
-    if (submitTime(name)) {
-      navigate("/highscores");
+    const submitTimeResult = submitTime(name);
+    if (submitTimeResult) {
+      navigate("/highscores", { state: { currentResult: submitTimeResult } });
     }
 
     return;

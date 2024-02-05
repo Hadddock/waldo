@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { useLocation } from "react-router-dom";
 
 const url =
   import.meta.env.VITE_ENVIRONEMNT === "production"
@@ -7,6 +8,8 @@ const url =
     : "https://w-waldo-855c2f9cefa0.herokuapp.com";
 
 function Results() {
+  const { state } = useLocation();
+  const { currentResult } = state; // Read values passed on state
   const [highscores, setHighscores] = useState([]);
 
   useEffect(() => {
@@ -17,7 +20,20 @@ function Results() {
         const message = `An error occurred: ${response.statusText}`;
         window.alert(message);
       }
+
       const responseJson = await response.json();
+      if (currentResult && !responseJson.scores.includes(currentResult)) {
+        responseJson.scores.push(currentResult);
+        responseJson.sort((a, b) => {
+          if (a.time < b.time) {
+            return -1;
+          } else if (a.time > b.time) {
+            return 1;
+          }
+          return 0;
+        });
+        responseJson.scores.pop();
+      }
       setHighscores(responseJson.scores);
     }
 

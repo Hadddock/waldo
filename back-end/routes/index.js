@@ -43,7 +43,12 @@ router.get(
           }).exec();
           if (scoreWithReusedToken === null) {
             const currentRecord = await score.save();
-            res.json({ currentRecord: currentRecord });
+            res.json({
+              currentRecord: {
+                name: currentRecord.player_name,
+                time: currentRecord.display_time,
+              },
+            });
           } else {
             console.log("This token has been submitted before!");
             res.json({ status: "failed" });
