@@ -42,7 +42,7 @@ router.get(
             jwt: req.token,
           }).exec();
           if (scoreWithReusedToken === null) {
-            score.save();
+            await score.save();
           } else {
             console.log("This token has been submitted before!");
           }
