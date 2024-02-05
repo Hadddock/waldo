@@ -9,7 +9,11 @@ const url =
 
 function Results() {
   const { state } = useLocation();
-  const { currentResult } = state; // Read values passed on state
+  let currentResult;
+  if (state) {
+    currentResult = state.currentResult;
+  }
+
   const [highscores, setHighscores] = useState([]);
 
   useEffect(() => {
@@ -21,8 +25,11 @@ function Results() {
         window.alert(message);
       }
 
+      console.log("HERE's THE CURRENT RESULT" + currentResult);
+
       const responseJson = await response.json();
       if (currentResult && !responseJson.scores.includes(currentResult)) {
+        console.log("HEY THERE WAS SOMETHING PASSED IN");
         responseJson.scores.push(currentResult);
         responseJson.sort((a, b) => {
           if (a.time < b.time) {
