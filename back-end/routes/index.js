@@ -42,8 +42,8 @@ router.get(
             jwt: req.token,
           }).exec();
           if (scoreWithReusedToken === null) {
-            await score.save();
-            res.json({ status: "success" });
+            const currentRecord = await score.save();
+            res.json({ currentRecord: currentRecord });
           } else {
             console.log("This token has been submitted before!");
             res.json({ status: "failed" });
