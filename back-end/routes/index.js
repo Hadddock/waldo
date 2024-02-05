@@ -43,8 +43,10 @@ router.get(
           }).exec();
           if (scoreWithReusedToken === null) {
             await score.save();
+            res.json({ status: "success" });
           } else {
             console.log("This token has been submitted before!");
+            res.json({ status: "failed" });
           }
         }
       }

@@ -22,7 +22,7 @@ export default function ScoreEntry() {
       return false;
     }
     const responseJson = await response.json();
-    console.log(responseJson.wow);
+
     return true;
   }
 
