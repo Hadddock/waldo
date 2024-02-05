@@ -8,7 +8,7 @@ const characterNames = ["Waldo", "Wilma", "Wizard", "Woof", "Odlaw"];
 const url =
   import.meta.env.VITE_ENVIRONEMNT === "production"
     ? "http://localhost:3000"
-    : "https://w-waldo-855c2f9cefa0.herokuapp.com/";
+    : "https://w-waldo-855c2f9cefa0.herokuapp.com";
 
 export default function ImageTagger() {
   const [loaded, setLoaded] = useState(false);

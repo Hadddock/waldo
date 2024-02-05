@@ -20,7 +20,7 @@ export default function SelectionMarker({ x, y, submitCharacter }) {
       <div className="marker"></div>
       <div style={{ pointerEvents: "auto", backgroundColor: "black" }}>
         <fieldset>
-          <legend>Select the character</legend>
+          <legend>Select the character </legend>
           <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
             <button onClick={submitCharacter.bind(null, "Waldo", x, y)}>
               Waldo

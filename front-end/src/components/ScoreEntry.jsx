@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const url =
   import.meta.env.VITE_ENVIRONEMNT === "production"
     ? "http://localhost:3000"
-    : "https://w-waldo-855c2f9cefa0.herokuapp.com/";
+    : "https://w-waldo-855c2f9cefa0.herokuapp.com";
 export default function ScoreEntry() {
   const navigate = useNavigate();
   const { time } = useParams();

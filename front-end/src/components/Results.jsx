@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 const url =
   import.meta.env.VITE_ENVIRONEMNT === "production"
     ? "http://localhost:3000"
-    : "https://w-waldo-855c2f9cefa0.herokuapp.com/";
+    : "https://w-waldo-855c2f9cefa0.herokuapp.com";
 
 function Results() {
   const [highscores, setHighscores] = useState([]);
