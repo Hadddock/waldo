@@ -9,11 +9,6 @@ export default function Layout(props) {
       <header
         style={{
           position: location.pathname === "/" ? "fixed" : "static",
-          top: 0,
-          width: "100%",
-          gap: "10px",
-          display: "Flex",
-          padding: "10px",
         }}
       >
         {location.pathname === "/" ? (
