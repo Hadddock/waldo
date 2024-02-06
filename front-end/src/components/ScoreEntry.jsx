@@ -6,8 +6,8 @@ const url =
     ? "http://localhost:3000"
     : "https://w-waldo-855c2f9cefa0.herokuapp.com";
 
-function convertTime() {
-  const ms = this.time;
+function convertTime(time) {
+  const ms = time;
 
   const totalSeconds = ms / 1000;
   const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
