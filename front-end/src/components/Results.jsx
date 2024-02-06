@@ -56,9 +56,11 @@ function Results() {
 
   return (
     <h1>
-      {highscores.map((highscore) => (
-        <li key={uuidv4()}> {highscore.name + " " + highscore.time} </li>
-      ))}
+      <ol type="1" className="resultsList">
+        {highscores.map((highscore) => (
+          <li key={uuidv4()}> {highscore.name + " " + highscore.time} </li>
+        ))}
+      </ol>
     </h1>
   );
 }
