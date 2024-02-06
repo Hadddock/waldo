@@ -9,7 +9,7 @@ export default function Layout(props) {
       <header
         style={{
           position: location.pathname === "/" ? "fixed" : "static",
-          paddingTop: location.pathname === "/" ? "20px" : "0px",
+          paddingTop: location.pathname === "/" ? "20px" : "10px",
         }}
       >
         {location.pathname === "/" ? (
