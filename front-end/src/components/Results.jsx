@@ -25,13 +25,17 @@ function Results() {
         window.alert(message);
       }
 
-      console.log("HERE's THE CURRENT RESULT" + currentResult);
-
       const responseJson = await response.json();
-      if (currentResult && !responseJson.scores.includes(currentResult)) {
-        console.log("HEY THERE WAS SOMETHING PASSED IN");
+      if (
+        currentResult &&
+        !responseJson.scores.some((score) => {
+          return (
+            score.name == currentResult.name && score.time == currentResult.time
+          );
+        })
+      ) {
         responseJson.scores.push(currentResult);
-        responseJson.sort((a, b) => {
+        responseJson.scores.sort((a, b) => {
           if (a.time < b.time) {
             return -1;
           } else if (a.time > b.time) {
@@ -39,8 +43,11 @@ function Results() {
           }
           return 0;
         });
-        responseJson.scores.pop();
+        if (responseJson.scores.length > 10) {
+          responseJson.scores.pop();
+        }
       }
+
       setHighscores(responseJson.scores);
     }
 
