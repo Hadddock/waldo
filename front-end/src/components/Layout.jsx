@@ -8,7 +8,7 @@ export default function Layout(props) {
     <>
       <header
         style={{
-          position: "fixed",
+          position: location.pathname === "/" ? "fixed" : "auto",
           top: 0,
           width: "100%",
           gap: "10px",
