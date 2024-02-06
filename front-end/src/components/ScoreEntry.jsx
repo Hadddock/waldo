@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 
@@ -23,9 +23,12 @@ function convertTime(time) {
 export default function ScoreEntry() {
   const navigate = useNavigate();
   const { time } = useParams();
-  if (isNaN(Number(time))) {
-    navigate("/");
-  }
+
+  useEffect(() => {
+    if (isNaN(Number(time))) {
+      navigate("/400");
+    }
+  }, [time]);
 
   async function submitTime(name) {
     const response = await fetch(`${url}/score/` + name, {
@@ -49,6 +52,8 @@ export default function ScoreEntry() {
     const submitTimeResult = await submitTime(name);
     if (submitTimeResult) {
       navigate("/highscores", { state: { currentResult: submitTimeResult } });
+    } else {
+      navigate("/400");
     }
 
     return;

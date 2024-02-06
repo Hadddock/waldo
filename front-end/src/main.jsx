@@ -32,6 +32,15 @@ const router = createBrowserRouter([
       </Layout>
     ),
   },
+
+  {
+    path: "/400",
+    element: (
+      <Layout>
+        <div>400 Bad Request</div>
+      </Layout>
+    ),
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
