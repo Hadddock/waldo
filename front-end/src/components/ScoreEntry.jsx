@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
+
 const url =
   import.meta.env.VITE_ENVIRONEMNT === "production"
     ? "http://localhost:3000"
@@ -24,6 +25,9 @@ function convertTime(time) {
 export default function ScoreEntry() {
   const navigate = useNavigate();
   const { time } = useParams();
+  if (isNaN(Number(time))) {
+    navigate("/");
+  }
 
   async function submitTime(name) {
     const response = await fetch(`${url}/score/` + name, {
