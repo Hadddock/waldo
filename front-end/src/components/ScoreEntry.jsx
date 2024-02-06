@@ -25,10 +25,10 @@ export default function ScoreEntry() {
     return responseJson.currentRecord;
   }
 
-  function submitForm(e) {
+  async function submitForm(e) {
     e.preventDefault();
     const name = e.target[0].value;
-    const submitTimeResult = submitTime(name);
+    const submitTimeResult = await submitTime(name);
     if (submitTimeResult) {
       navigate("/highscores", { state: { currentResult: submitTimeResult } });
     }
