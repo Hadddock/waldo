@@ -125,6 +125,8 @@ export default function ImageTagger() {
         id="waldo-image"
         onLoad={getToken}
         style={{
+          width: "1976px",
+          height: "1240px",
           justifySelf: "center",
           alignSelf: "center",
           border: "10px solid red",
