@@ -9,7 +9,6 @@ const url =
 
 function convertTime(time) {
   const ms = time;
-
   const totalSeconds = ms / 1000;
   const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
   const minutes = String(
@@ -18,7 +17,6 @@ function convertTime(time) {
   const seconds = String(
     (totalSeconds - hours * 3600 - minutes * 60).toFixed(3)
   ).padStart(6, "0");
-
   return `${hours}:${minutes}:${seconds}`;
 }
 
@@ -66,7 +64,7 @@ export default function ScoreEntry() {
           name="name"
           type="text"
         ></input>
-        <input type="submit">Submit</input>
+        <input type="submit"></input>
       </form>
     </div>
   );
