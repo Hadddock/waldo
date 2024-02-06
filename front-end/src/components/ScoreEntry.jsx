@@ -5,6 +5,22 @@ const url =
   import.meta.env.VITE_ENVIRONEMNT === "production"
     ? "http://localhost:3000"
     : "https://w-waldo-855c2f9cefa0.herokuapp.com";
+
+function convertTime() {
+  const ms = this.time;
+
+  const totalSeconds = ms / 1000;
+  const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+  const minutes = String(
+    Math.floor((totalSeconds - hours * 3600) / 60)
+  ).padStart(2, "0");
+  const seconds = String(
+    (totalSeconds - hours * 3600 - minutes * 60).toFixed(3)
+  ).padStart(6, "0");
+
+  return `${hours}:${minutes}:${seconds}`;
+}
+
 export default function ScoreEntry() {
   const navigate = useNavigate();
   const { time } = useParams();
@@ -36,11 +52,17 @@ export default function ScoreEntry() {
     return;
   }
   return (
-    <div style={{ marginTop: "80px  " }}>
-      <div>{time}</div>
+    <div>
+      <div>Your Time: {convertTime(time)}</div>
       <form onSubmit={submitForm}>
-        <input id="name" name="name" type="text"></input>
-        <input type="submit"></input>
+        <label htmlFor="name">Enter your name:</label>
+        <input
+          placeholder="Your name here"
+          id="name"
+          name="name"
+          type="text"
+        ></input>
+        <input type="submit">Submit</input>
       </form>
     </div>
   );
